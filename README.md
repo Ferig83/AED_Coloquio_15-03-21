@@ -19,22 +19,24 @@ En C++ podemos encontrar muchos contenedores implementados bajo la forma de "tem
 
 En esta presentación diseñamos tres tipos de contenedores:
 
-* Lista  (conteniendo el tipo de dato "Contacto")
 * Pila  (conteniendo el tipo de dato "Undo")
+* Lista  (conteniendo el tipo de dato "Contacto")
 * Cola  (conteniendo el tipo de dato "Paciente")
 
-##### Contenedores Enlazados
 
+#### PILA
 
 Dado un conjunto de datos:
 
 A = {Dato_1, Dato_2, Dato_3, ... , Dato_n-1}
+
 n(A) = n
 
    
-Sea PILA una sucesión de elementos del conjunto A, por ejemplo:
+Sea PILA una sucesión de n elementos del conjunto A, por ejemplo:
 
-PILA = {Dato_3, Dato_2, Dato_2, nulo, Dato_4}
+PILA = {Dato_3, Dato_2, Dato_2, Dato_4}
+n(PILA) = 4
 
 Se establecen las siguientes funciones:
 
@@ -44,71 +46,72 @@ Se establecen las siguientes funciones:
 
 * void -> __peek__ -> __a__ perteneciente al conjunto A : __a__ sea el n-ésimo elemento     
 
-* __a__ perceneciente al conjunto A -> __push__ -> PILA' : n(PILA') = n(PILA)+1  ^  PILA_n = __a__
+* __a__ perceneciente al conjunto A -> __push__ -> PILA' : n(PILA') = n(PILA)+1  ^  PILA'_n = __a__
 
-* void -> __pop__ -> (__a__ perteneciente al conjunto A : __a__ sea el n-ésimo elemento de PILA) X (PILA' / n(PILA') = n(PILA) - 1)
+* void -> __pop__ -> (__a__ perteneciente al conjunto A : __a__ sea el n-ésimo elemento de PILA) X (PILA' : n(PILA') = n(PILA) - 1)
   
+#### LISTA
+
+Dado un conjunto de datos:
+
+A = {Dato_1, Dato_2, Dato_3, ... , Dato_n-1}
+
+n(A) = n
+
+   
+Sea LISTA una sucesión de n elementos del conjunto A, por ejemplo:
+
+LISTA = {Dato_3, Dato_2, Dato_2, Dato_4}
+n(LISTA) = 4
+
+Se establecen las siguientes funciones:
+
+* void -> __is_vacia__ -> booleano B : B es "verdadero" si el cardinal de LISTA es 0, y "falso" si el cardinal de LISTA es distinto de cero
+
+* void -> __get_tamanio__ -> natural N : N es el cardinal del conjunto LISTA
+
+* natural N -> __get_posicion__ -> __a__ perteneciente al conjunto A : __a__ = LISTA_N
+
+* (__a__ perteneciente al conjunto A) X (natural N) -> __set_posicion__ -> LISTA' : LISTA'_N = __a__
+
+* __a__ perteneciente al conjunto A -> agregar_al_final -> LISTA' : n(LISTA') = n(LISTA) + 1 ^ LISTA'_n = __a__
+ 
+* (__a__ perteneciente al conjunto A) x (natural N) -> agregar_en -> LISTA' : n(LISTA') = n(LISTA) + 1 ^ LISTA_m = COLA_m+1 con m > N ^ LISTA_1 = __a__
 
 
 
-Sea "Tipo" un tipo de dato y Tipo_1, Tipo_2 ... Tipo_n  las posiciones ordenadas de los objetos creados bajo ese tipos de dato, y "n" el número de datos totales
 
-- __Lista_Enlazada__ = {(Tipo_1);(Tipo_2);(Tipo_3); ... ;(Tipo_n)}
-
-Con los siguientes métodos:
-
-* agregar_al_final(Tipo x) = {(Tipo_1); (Tipo_2); ...; (Tipo_n); (x_n+1)}
-* agregar_en(Tipo x, m) = {(Tipo_1); (Tipo_2); ...; (x_m) ;...; (Tipo_n+1)}
-* set_nodo(Tipo x, m) = Tipo_m -> x_m
-* borrar_nodo (m) = Tipo_m -> nulo  ^  n = n - 1    (ordinal decrementado en 1)
-*	get_dato_nodo (m) = Tipo_m
-* get_tamanio = n
-* is_vacia = verdadero si el ordinal de Lista_Enlazada es 0 , falso si el ordinal de Lista_Enlazada es distinto de cero
+#### COLA
 
 
 
+Dado un conjunto de datos:
 
-- __Cola__ = {(Tipo_1);(Tipo_2);(Tipo_3); ... ;(Tipo_n)}
+A = {Dato_1, Dato_2, Dato_3, ... , Dato_n-1}
 
-Con los siguientes métodos:
+n(A) = n
 
-* queue(Tipo x) = {(Tipo_1); (Tipo_2); ...; (Tipo_n); (x)}
-* unqueue = Tipo_1  con {(Tipo_2);(Tipo_3);(Tipo_4); ... ;(Tipo_n-1)} ^  n = n - 1    (ordinal decrementado en 1)
-* frente = Tipo_1
-* get_tamanio = n
-* is_vacia = verdadero si el ordinal de Cola es 0, falso si el ordinal de Cola es distinto de cero
+   
+Sea COLA una sucesión de n elementos del conjunto A, por ejemplo:
 
-##### Contenedores Continuos:
-
-- __Lista_Continua__ = {(Tipo_1);(Tipo_2);(Tipo_3); ... ;(Tipo_n)}
-
-Con los siguientes métodos:
-
-* set_nodo(Tipo x, m) = Tipo_m -> x_m
-*	get_dato_nodo (m) = Tipo_m
-* get_tamanio = n
+COLA = {Dato_3, Dato_2, Dato_2, Dato_4}
+n(COLA) = 4
 
 
-- __Pila__ = {(Tipo_1);(Tipo_2);(Tipo_3); ... ;(Tipo_n)}
+Se establecen las siguientes funciones:
 
-Con los siguientes métodos:
+* void -> __is_vacia__ -> booleano B : B es "verdadero" si el cardinal de LISTA es 0, y "falso" si el cardinal de LISTA es distinto de cero
 
-* push(Tipo x) =  {(Tipo_1); (Tipo_2); ...; (Tipo_n); (x)}
-* pop = Tipo_1  con {(Tipo_1);(Tipo_2);(Tipo_3); ... ;(Tipo_n-1)} ^  n = n - 1 (ordinal decrementado en 1)
-* peek = Tipo_n
-* get_tamanio = n
-* is_vacia = verdadero si el ordinal de Pila es 0, falso si el ordinal de Pila es distinto de cero
+* void -> __get_tamanio__ -> natural N : N es el cardinal del conjunto LISTA
+
+* __a__ perteneciente al conjunto A -> __queue__ -> COLA' : n(COLA') = n(COLA)+1  ^  COLA_n = COLA_n+1 ^ COLA_1 = __a__
+
+* void -> __unqueue__ -> (__a__ perteneciente al conjunto A : __a__ sea el n-ésimo elemento de COLA) X (COLA' : n(COLA') = n(COLA) - 1)
+
+* void -> __frente__ -> __a__ perteneciente al conjunto A : __a__ sea el n-ésimo elemento     
 
 
-- __Cola__ = {(Tipo_n);....;(Tipo_3);(Tipo_2);(Tipo_1)}
-
-Con los siguientes métodos:
-
-* queue(Tipo x) = {(x);(Tipo_n);....;(Tipo_3);(Tipo_2);(Tipo_1)}
-* unqueue = Tipo_1  con {(Tipo_n-1);....;(Tipo_3);(Tipo_2)} ^  n = n - 1    (ordinal decrementado en 1)
-* frente = Tipo_1
-* get_tamanio = n
-* is_vacia = verdadero si el ordinal de Cola es 0, falso si el ordinal de Cola es distinto de cero
+__ADVERTENCIA__: Para todos los contenedores, cuando no haya datos que recuperar, se devolverá un valor indefinido o nulo (estructura inicializada en "cero" y/o con cadenas nulas)
 
 
 
