@@ -1,0 +1,41 @@
+- Lista estoy dejando para el final porque vamos a intentar hacer el polimorfismo con las funciones base
+	- falta usar los nodos/elementos nulos y testear muy muy bien ambas
+
+Esto se puede hacer luego:
+
+- Verificar que estén bien los nombres de las variables y algunos algoritmos que están un poco desprolijos o
+son poco ortodoxos, especialmente algunos de swapping como los de borrar
+
+	SIEMPRE REUSAR FUNCIONES EN CASO DE QUE SEA POSIBLE!!
+
+- Revisar los .h y .cpp, especialmente en nodos y datos. Que las contiguas no llamen a los nodos!!!
+- Fijarse si se puede hacer la demostración matemática
+
+-------------
+
+
+Lo facil
+
+(hecho)- Cambiar lo de nodo para las contiguas 
+(hecho)- Cambiar nombre Lista_Continua a Lista y usar polimorfismo, o directamente depender de los namespaces 
+(hecho)- Cambiar nombre de "indice" a "arreglo" ó "elementos"
+
+---------------------------------
+
+Lo medio
+
+(hecho)- Hacer 6 archivos (uno por cada tipo)  , aunque si usas polimorfismo podés usar 3. Dejar el namespace ayed, pero que sea ese nomás
+
+
+(hecho) - Me pidio que analizara si podía hacer esto. Quizás en vez de polimorfismo poder decidirlo así:
+
+Pila p = new PilaEnlazada()   
+Pila p = new PilaContigua()
+
+---------------------------------
+
+Averiguar sobre: 
+* "pimpl"  "puntero opaco" (opace pointer / pointer to implementation)   para encapsular los ".h"
+
+Quedo pendiente porque no necesitaría mostrar toda la implementación ya que ahora sí esta en .cpp
+
