@@ -13,17 +13,43 @@
 
 #### Léxico e Hipótesis de trabajo
 
-Los contenedores son tipos de datos o estructuras que contienen en si mismos otro tipo de objetos (ya sean estructuras, tipos de datos atómicos, otros contenedores, etc). Por ejemplo, se puede diseñar un contenedor como una pila que funcione como tal y maneje en su estructura cualquier tipo de dato (inclusive otra pila). Se diferencia de las estructuras en que los tipos de datos no están definidos en nuestro código (sí se definen al compilarse).
+Los contenedores son tipos de datos o estructuras que contienen en si mismos otro tipo de objetos (ya sean estructuras, tipos de datos atómicos, otros contenedores, etc). Por ejemplo, se puede diseñar un contenedor como una pila que funcione como tal y maneje en su estructura cualquier tipo de dato (inclusive otra pila). 
 
-En C++ podemos encontrar muchos contenedores implementados bajo la forma de "templates" (y una biblioteca llamada Standard Template Library que los incluye), como por ejemplo std::array que permite manejar un array continuo utilizando como objetos del array el tipo de dato o estructura que queramos.
+En C++ podemos encontrar muchos contenedores implementados bajo la forma de "templates" (y una biblioteca llamada Standard Template Library que los incluye), como por ejemplo std::array que permite manejar un array continuo utilizando como objetos del array el tipo de dato o estructura que queramos. Este tipo de contenedores son genéricos por poder ponerse dentro cualquier tipo de dato, pero los que presentaremos tendrán tipos de datos concretos.
 
-En esta presentación diseñamos tres tipos de contenedores utilizando el mismo sistema de templates:
+En esta presentación diseñamos tres tipos de contenedores:
 
-* Lista_Enlazada
-* Pila
-* Cola
+* Lista  (conteniendo el tipo de dato "Contacto")
+* Pila  (conteniendo el tipo de dato "Undo")
+* Cola  (conteniendo el tipo de dato "Paciente")
 
 ##### Contenedores Enlazados
+
+
+Dado un conjunto de datos:
+
+A = {Dato_1, Dato_2, Dato_3, ... , Dato_n-1}
+n(A) = n
+
+   
+Sea PILA una sucesión de elementos del conjunto A, por ejemplo:
+
+PILA = {Dato_3, Dato_2, Dato_2, nulo, Dato_4}
+
+Se establecen las siguientes funciones:
+
+* void -> __is_vacia__ -> booleano B : B es "verdadero" si el cardinal de PILA es 0, y "falso" si el cardinal de PILA es distinto de cero
+
+* void -> __get_tamanio__ -> natural N : N es el cardinal del conjunto PILA
+
+* void -> __peek__ -> __a__ perteneciente al conjunto A : __a__ sea el n-ésimo elemento     
+
+* __a__ perceneciente al conjunto A -> __push__ -> PILA' : n(PILA') = n(PILA)+1  ^  PILA_n = __a__
+
+* void -> __pop__ -> (__a__ perteneciente al conjunto A : __a__ sea el n-ésimo elemento de PILA) X (PILA' / n(PILA') = n(PILA) - 1)
+  
+
+
 
 Sea "Tipo" un tipo de dato y Tipo_1, Tipo_2 ... Tipo_n  las posiciones ordenadas de los objetos creados bajo ese tipos de dato, y "n" el número de datos totales
 
@@ -40,15 +66,6 @@ Con los siguientes métodos:
 * is_vacia = verdadero si el ordinal de Lista_Enlazada es 0 , falso si el ordinal de Lista_Enlazada es distinto de cero
 
 
-- __Pila__ = {(Tipo_1);(Tipo_2);(Tipo_3); ... ;(Tipo_n)}
-
-Con los siguientes métodos:
-
-* push(Tipo x) = {(x); (Tipo_(1+1)); (Tipo_(2+1)); ...; ((Tipo_(n+1))}
-* pop = Tipo_1  con {(Tipo_2);(Tipo_3);(Tipo_4); ... ;(Tipo_n-1)} ^  n = n - 1 (ordinal decrementado en 1)
-* peek = Tipo_1
-* get_tamanio = n
-* is_vacia = verdadero si el ordinal de Pila es 0, falso si el ordinal de Pila es distinto de cero
 
 
 - __Cola__ = {(Tipo_1);(Tipo_2);(Tipo_3); ... ;(Tipo_n)}
@@ -111,7 +128,7 @@ El modelo IPO puede consistir en:
 * Procesamiento: Dar formato al nombre para su salida y adherir un mensaje de "Pase, por favor"
 * Salida: Enviar el flujo de datos a través de un archivo que representaría el buffer del display, con posterior borrado del elemento
 
-La aplicación es muy simple pero demuestra de una manera sencilla el sistema FIFO y cómo la Cola diseñada actúa como contenedor de la estructura Paciente (la cual tiene nombre y apellido como cadenas).
+La aplicación es muy simple pero demuestra de una manera sencilla el sistema FIFO y cómo la Cola diseñada actúa como contenedor de la clase Paciente (la cual tiene nombre y apellido como cadenas).
 
 
 ### Sistema básico de UNDO (deshacer) - Uso de Lista_Enlazada y Pila
@@ -120,7 +137,7 @@ Se necesita una aplicación base que consiste en una agenda con cuatro celdas de
 
 ### Modelo IPO y resolución del problema:
 
-La agenda misma consiste en un archivo donde se tienen todos los datos pero para conveniencia se almacenarán todos en memoria apenas se inicia la aplicación. Este almacenamiento requerirá de poder editar cualquier nodo de la lista donde se guarde, por lo que se ve conveniente  utilizar nuestro contenedor "Lista_Enlazada", que contendrá la estructura "Persona" (la cual contiene nombre, apellido, dirección y teléfono). Sin embargo, también debemos escribir un sistema para deshacer los cambios en el caso de que el usuario se haya equivocado, y este tipo de sistemas cumple muy bien con el método de almacenamiento LIFO (Last In First Out - Último en Entrar, Primero en Salir) haciendo ideal el uso de la Pila (los últimos cambios son los que se deben deshacer primero).
+La agenda misma consiste en un archivo donde se tienen todos los datos pero para conveniencia se almacenarán todos en memoria apenas se inicia la aplicación. Este almacenamiento requerirá de poder editar cualquier nodo de la lista donde se guarde, por lo que se ve conveniente  utilizar nuestro contenedor "Lista", que contendrá la estructura "Contacto" (la cual contiene nombre, apellido, dirección y teléfono). Sin embargo, también debemos escribir un sistema para deshacer los cambios en el caso de que el usuario se haya equivocado, y este tipo de sistemas cumple muy bien con el método de almacenamiento LIFO (Last In First Out - Último en Entrar, Primero en Salir) haciendo ideal el uso de la Pila (los últimos cambios son los que se deben deshacer primero).
 
 El modelo IPO puede consistir en:
 
@@ -136,4 +153,4 @@ Para deshacer cambios:
 * Procesamiento: Reemplazar la última modificación por una anterior
 * Salida: Base de datos sin la última modificación
 
-La aplicación es un ejemplo combinado de Lista_Enlazada y Pila, y representa una agenda muy simplificada para demostrar de manera sencilla el posible uso de ambos contenedores.
+La aplicación es un ejemplo combinado de Lista y Pila, y representa una agenda muy simplificada para demostrar de manera sencilla el posible uso de ambos contenedores.
