@@ -26,7 +26,7 @@ int main() {
 	delete lista;
 	}
 
-	//--- Lista Enlazada ---
+	//--- Lista Contigua ---
 	{
 	ayed::Lista* lista = new ayed::Lista_Contigua(3);
 	lista->agregar_al_final(primero);
